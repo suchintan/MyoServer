@@ -8,6 +8,7 @@ public class Pose {
 
     }
     private PoseType pose;
+    private Direction direction;
 
     public PoseType getPose() {
         return pose;
@@ -15,5 +16,13 @@ public class Pose {
 
     public void setPose(PoseType pose) {
         this.pose = pose;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 }
