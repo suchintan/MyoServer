@@ -8,5 +8,6 @@ public enum Action {
     Left,
     Right,
     Cruise,
-    Unlock
+    Unlock,
+    Lock
 }

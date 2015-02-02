@@ -22,13 +22,40 @@ public class MyoServer extends NanoHTTPD{
 
         JSON j = new JSON();
         //start with this
-        j.setPose(PoseType.THUMB_TO_PINKY);
-        j.setAction(Action.Unlock);
+        j.setPose(PoseType.UNKNOWN);
+        j.setAction(Action.Shutdown);
 
-        //after 100 seconds change pose
-        if(c == 100){
-            j.setPose(PoseType.FIST);
+        //after 5 seconds change pose
+        if(c >= 5){
+            j.setPose(PoseType.THUMB_TO_PINKY);
+            j.setAction(Action.Start);
+        }
+        if(c >= 10){
+            j.setPose(PoseType.REST);
+            j.setAction(Action.Cruise);
+        }
+        if(c >= 15){
+            j.setPose(PoseType.THUMB_TO_PINKY);
+            j.setAction(Action.Lock);
+        }
+        if(c >= 20){
+            j.setPose(PoseType.THUMB_TO_PINKY);
+            j.setAction(Action.Unlock);
+        }
+        if(c >= 25){
+            j.setPose(PoseType.WAVE_OUT);
             j.setAction(Action.Right);
+        }
+        if(c >= 30){
+            j.setPose(PoseType.FINGERS_SPREAD);
+            j.setAction(Action.Stop);
+        }
+        if(c >= 35){
+            j.setPose(PoseType.WAVE_OUT);
+            j.setAction(Action.Shutdown);
+        }
+        if(c>=50){
+            c = 0;
         }
         Response r = new NanoHTTPD.Response(new Gson().toJson(j));
         r.addHeader("Access-Control-Allow-Origin", "*");
@@ -41,12 +68,15 @@ public class MyoServer extends NanoHTTPD{
         (new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                while(true){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    c++;
+                    System.out.println(c);
                 }
-                c++;
             }
         })).start();
         ServerRunner.run(MyoServer.class);
