@@ -15,7 +15,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
         JsonObject jo = jsonElement.getAsJsonObject();
         String eventType = jo.get("type").getAsString();
         long timestamp = Long.parseLong(jo.get("timestamp").getAsString());
-
+        int myo = jo.get("myo").getAsInt();
         if(eventType.equals("orientation")){
             OrientationEvent oe = new OrientationEvent();
 
@@ -48,6 +48,7 @@ public class EventDeserializer implements JsonDeserializer<Event> {
 
         e.setType(eventType);
         e.setTimestamp(timestamp);
+        e.setMyo(myo);
 
         return e;
     }

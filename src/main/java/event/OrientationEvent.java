@@ -78,5 +78,25 @@ public class OrientationEvent extends Event {
         public void setZ(double z) {
             this.z = z;
         }
+
+        public double getRoll(){
+            return Math.atan2(2 * (y * z + w * x), w * w - x * x - y * y + z * z);
+        }
+
+        public double getPitch(){
+            return Math.asin(-2*(x*z - w*y));
+        }
+
+        public double getYaw(){
+            return Math.atan2(2*(x*y + w*z), w*w + x*x - y*y - z*z);
+        }
+        @Override
+        public String toString() {
+            return w + "," + x + "," + y + "," + z;
+        }
+
+        public String getYawPitchRoll(){
+            return getYaw() + "," + getPitch() + "," + getRoll();
+        }
     }
 }

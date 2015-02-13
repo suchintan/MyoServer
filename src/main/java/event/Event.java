@@ -6,6 +6,8 @@ package event;
 public class Event {
     private long timestamp;
     private String type;
+    private int myo;
+
     public long getTimestamp() {
         return timestamp;
     }
@@ -20,5 +22,13 @@ public class Event {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getMyo() {
+        return myo;
+    }
+
+    public void setMyo(int myo) {
+        this.myo = myo;
     }
 }
